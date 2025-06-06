@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revive Tu Hogar</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <meta name="description" content="Revive Tu Hogar - Especialistas en diseño y decoración de interiores">
+    <meta name="keywords" content="diseño de interiores, decoración, hogar, reformas">
+    <style>
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary-color, #F4EDE3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(177, 143, 107, 0.2);
+            border-top: 5px solid var(--accent-color, #B18F6B);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .loading-text {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 24px;
+            color: var(--primary-color, #6F6250);
+            margin-top: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .loading-bar {
+            width: 240px;
+            height: 8px;
+            background-color: rgba(177, 143, 107, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .loading-progress {
+            width: 0%;
+            height: 100%;
+            background-color: var(--accent-color, #B18F6B);
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        body {
+            margin: 0;
+        }
+        
+        /* Navbar visibility during loading */
+        body.loading .nav-transparent {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .nav-transparent {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="spinner"></div>
+        <div class="loading-text">Cargando...</div>
+        <div class="loading-bar">
+            <div class="loading-progress" id="loadingProgress"></div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script>
+        function simulateLoading() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const loadingProgress = document.getElementById('loadingProgress');
+            const loadingText = document.querySelector('.loading-text');
+            document.body.classList.add('loading');
+
+            // Animación de la barra de progreso y texto con Anime.js
+            var loadingAnimation = anime.timeline({
+                easing: 'easeOutExpo',
+                duration: 3000 // Duración total de la simulación de carga
+            });
+
+            loadingAnimation
+            .add({
+                targets: loadingProgress,
+                width: '100%', // Animar el ancho de 0% a 100%
+                duration: 2700, // Duración de la barra de progreso
+                easing: 'linear',
+                update: function(anim) {
+                    // Actualizar el texto de carga si es necesario, por ejemplo, con porcentaje
+                    // loadingText.textContent = 'Cargando ' + Math.round(anim.progress) + '%';
+                }
+            })
+            .add({
+                targets: loadingScreen,
+                opacity: [1, 0],
+                duration: 300, // Duración del desvanecimiento
+                easing: 'easeOutQuad',
+                complete: function() {
+                    document.body.classList.remove('loading');
+                    loadingScreen.style.display = 'none';
+                    if (typeof window.startAnimeAnimations === 'function') {
+                        window.startAnimeAnimations();
+                    }
+                }
+            }, '-=300'); // Iniciar esta animación 300ms antes de que termine la anterior
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            simulateLoading();
+        });
+    </script>
+    <header class="hero">
+        <div class="hero-background">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-living-room-with-a-modern-design-2995-large.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+        <nav class="nav-transparent">
+            <a href="#inicio" class="active">Inicio</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#galeria">Galería</a>
+            <a href="#contacto">Contacto</a>
+            <a href="#blog">Blog</a>
+            <a href="html/login.html" class="login-link">Iniciar Sesión</a>
+        </nav>
+        <div class="hero-content">
+            <h1 class="hero-title">Remodela Tu Hogar</h1>
+            <p class="hero-subtitle">Transforma tu espacio, mejora tu vida colaborando con expertos en diseño</p>
+            <div class="hero-cta">
+                <a href="#contacto" class="btn">Empezar el cambio</a>
+                <a href="#servicios" class="btn-secondary">Explorar servicios</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section id="servicios">
+            <h2>Nuestros Servicios</h2>
+            <div class="servicios">
+                <div class="servicio">
+                    <i class="fas fa-pencil-ruler fa-3x"></i>
+                    <h3>Diseño de Interiores</h3>
+                    <p>Creación de espacios funcionales y estéticos adaptados a tus necesidades</p>
+                    <a href="html/servicios/diseno-interiores.html" class="btn">Ver más</a>
+                </div>
+                <div class="servicio">
+                    <i class="fas fa-paint-brush fa-3x"></i>
+                    <h3>Decoración</h3>
+                    <p>Transformamos tus espacios con estilo y personalidad</p>
+                    <a href="html/servicios/decoracion.html" class="btn">Ver más</a>
+                </div>
+                <div class="servicio">
+                    <i class="fas fa-hammer fa-3x"></i>
+                    <h3>Reformas</h3>
+                    <p>Renovamos tu hogar con la máxima calidad y eficiencia</p>
+                    <a href="html/servicios/reformas.html" class="btn">Ver más</a>
+                </div>
+            </div>
+        </section>
+        <section id="galeria">
+            <h2>Nuestra Galería</h2>
+            <div class="galeria">
+                <div class="imagen">
+                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Diseño de sala moderna">
+                </div>
+                <div class="imagen">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Cocina renovada">
+                </div>
+                <div class="imagen">
+                    <img src="https://images.unsplash.com/photo-1616137422495-1e9e46e2aa77?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Dormitorio elegante">
+                </div>
+                <div class="imagen">
+                    <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Baño moderno">
+                </div>
+            </div>
+        </section>
+        <section id="contacto">
+            <h2>Contáctanos</h2>
+            <div class="contact-container">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn-secondary">Enviar Mensaje</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section id="blog">
+            <h2>Blog</h2>
+            <div class="blog-posts" id="blogPosts">
+                <!-- Posts will be loaded dynamically from the database -->
+                <div class="loading-posts">
+                    <p>Cargando artículos...</p>
+                </div>
+            </div>
+            <div class="text-center mt-1">
+                <a href="html/admin.html" class="btn-secondary">Administrar Blog</a>
+            </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="about">
+                    <h3>Sobre Nosotros</h3>
+                    <p>Somos un equipo apasionado por el diseño y la transformación de espacios. Creemos que cada hogar debe reflejar la personalidad de quienes lo habitan.</p>
+                    <a href="#" class="btn-link">Conoce más sobre nosotros</a>
+                </div>
+                <div class="contact-info">
+                    <div class="info-section">
+                        <h3>Contacto</h3>
+                        <p><i class="fas fa-phone"></i> +34 123 456 789</p>
+                        <p><i class="fas fa-envelope"></i> info@revivetuhogar.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Calle Principal 123, Madrid</p>
+                    </div>
+                    <div class="quick-links">
+                        <h3>Enlaces Rápidos</h3>
+                        <ul>
+                            <li><a href="#">Inicio</a></li>
+                            <li><a href="#">Servicios</a></li>
+                            <li><a href="#">Proyectos</a></li>
+                            <li><a href="#">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div class="social">
+                        <h3>Síguenos</h3>
+                        <div class="social-icons">
+                            <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2024 Revive Tu Hogar. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.nav-transparent');
+            const heroSection = document.querySelector('.hero');
+            const navLinks = navbar.querySelectorAll('a');
+            
+            // Check if navbar is below hero section
+            const heroBottom = heroSection.getBoundingClientRect().bottom;
+            const navbarHeight = navbar.offsetHeight;
+            const transitionPoint = heroBottom - navbarHeight;
+            
+            // Synchronize both background and text color changes
+            if (transitionPoint <= 0) {
+                // When navbar is transitioning to services section
+                navbar.classList.add('scrolled');
+                
+                // Change text color to dark for services section
+                navLinks.forEach(link => {
+                    link.style.color = '#3F3324';
+                    // Always keep login link with light text on dark background
+                    if (link.classList.contains('login-link')) {
+                        link.style.color = '#F4EDE3';
+                    }
+                });
+            } else {
+                // When navbar is in hero section
+                navbar.classList.remove('scrolled');
+                
+                // Light text color for hero section
+                navLinks.forEach(link => {
+                    link.style.color = '#F4EDE3';
+                });
+            }
+        });
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="js/anime-animations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

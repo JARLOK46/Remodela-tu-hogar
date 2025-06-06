@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decoración - Revive Tu Hogar</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/forms.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <style>
+        .service-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1586105251261-72a756497a11?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .service-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-section {
+            padding: 3rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .service-card-content {
+            padding: 1.5rem;
+        }
+        
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 3rem 0;
+        }
+        
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 1.5rem;
+            position: relative;
+        }
+        
+        .process-step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+            transform: translateX(50%);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonials {
+            background-color: var(--secondary-color);
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            border-radius: var(--border-radius);
+        }
+        
+        .testimonial {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .process-step:not(:last-child):after {
+                display: none;
+            }
+            
+            .service-hero {
+                padding: 4rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="spinner"></div>
+        <div class="loading-text">Cargando...</div>
+        <div class="loading-bar">
+            <div class="loading-progress" id="loadingProgress"></div>
+        </div>
+    </div>
+    <script>
+        function simulateLoading() {
+            let percent = 0;
+            const loadingScreen = document.getElementById('loadingScreen');
+            const loadingProgress = document.getElementById('loadingProgress');
+            document.body.classList.add('loading');
+
+            const interval = setInterval(function() {
+                if (percent >= 100) {
+                    clearInterval(interval);
+                    // First remove the loading class to make navbar visible immediately
+                    document.body.classList.remove('loading');
+                    // Then fade out the loading screen
+                    loadingScreen.style.opacity = '0';
+                    loadingScreen.style.transition = 'opacity 0.3s ease';
+                    
+                    // After transition, hide the loading screen completely
+                    setTimeout(function() {
+                        loadingScreen.style.display = 'none';
+                    }, 300);
+                } else {
+                    percent += 10;
+                    loadingProgress.style.width = percent + '%';
+                }
+            }, 300);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            simulateLoading();
+        });
+
+    </script>
+    <header class="hero" style="margin-top: 0; padding-top: 0;">
+        <div class="hero-background">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-living-room-with-a-modern-design-2995-large.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+        <nav class="nav-transparent">
+            <a href="../../">Inicio</a>
+            <a href="../../#servicios">Servicios</a>
+            <a href="../../#galeria">Galería</a>
+            <a href="../../#contacto">Contacto</a>
+            <a href="../../#blog">Blog</a>
+            <a href="../login.html" class="login-link">Iniciar Sesión</a>
+        </nav>
+        <div class="hero-content">
+            <h1 class="hero-title">Decoración</h1>
+            <p class="hero-subtitle">Transformamos tus espacios con estilo y personalidad</p>
+            <div class="hero-cta">
+                <a href="../../#contacto" class="btn">Solicitar información</a>
+                <a href="#servicios" class="btn-secondary">Ver servicios</a>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <section id="servicios" class="service-section">
+            <div class="container">
+                <h2>Nuestros Servicios de Decoración</h2>
+                <p class="lead">Transformamos cualquier espacio con un toque de estilo y personalidad, creando ambientes que reflejan tu esencia y mejoran tu calidad de vida.</p>
+                
+                <div class="service-grid">
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Decoración de interiores">
+                        <div class="service-card-content">
+                            <h3>Decoración de Interiores</h3>
+                            <p>Transformamos tus espacios interiores con un enfoque personalizado, seleccionando muebles, accesorios y elementos decorativos que reflejan tu estilo y personalidad.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Asesoría de color">
+                        <div class="service-card-content">
+                            <h3>Asesoría de Color</h3>
+                            <p>Te ayudamos a seleccionar la paleta de colores perfecta para cada espacio, creando ambientes armoniosos y acogedores que transmiten las emociones deseadas.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <img src="https://images.unsplash.com/photo-1615529328331-f8917597711f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Home Staging">
+                        <div class="service-card-content">
+                            <h3>Home Staging</h3>
+                            <p>Preparamos tu propiedad para la venta o alquiler, destacando sus mejores características y creando un ambiente atractivo para potenciales compradores.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="service-section">
+            <div class="container">
+                <h2>Nuestro Proceso</h2>
+                <p class="lead">Un enfoque metódico y personalizado para transformar tus espacios</p>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3>Consulta Inicial</h3>
+                        <p>Conocemos tus gustos, necesidades y el espacio a decorar para entender tu visión.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h3>Propuesta Decorativa</h3>
+                        <p>Desarrollamos un concepto decorativo personalizado con moodboards y selección de elementos.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h3>Selección Final</h3>
+                        <p>Refinamos la propuesta según tus comentarios y seleccionamos los elementos definitivos.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h3>Implementación</h3>
+                        <p>Coordinamos la adquisición e instalación de todos los elementos decorativos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="testimonials">
+            <h2>Lo que dicen nuestros clientes</h2>
+            <div class="testimonial">
+                <p class="testimonial-text">"El equipo de Revive Tu Hogar transformó mi sala de estar en un espacio acogedor y elegante. Su atención al detalle y capacidad para entender mi estilo personal fue excepcional. ¡Ahora disfruto cada minuto en mi nuevo espacio!"</p>
+                <p class="testimonial-author">- Carlos Mendoza, Barcelona</p>
+            </div>
+        </section>
+        
+        <section class="service-section cta-section">
+            <h2>¿Listo para transformar tu espacio?</h2>
+            <p class="lead">Contáctanos hoy mismo para comenzar a crear el ambiente de tus sueños</p>
+            <button class="btn" onclick="window.location.href='../../#contacto'">Contáctanos</button>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="about">
+                    <h3>Sobre Nosotros</h3>
+                    <p>Somos un equipo apasionado por el diseño y la transformación de espacios. Creemos que cada hogar debe reflejar la personalidad de quienes lo habitan.</p>
+                    <a href="#" class="btn-link">Conoce más sobre nosotros</a>
+                </div>
+                <div class="contact-info">
+                    <div class="info-section">
+                        <h3>Contacto</h3>
+                        <p><i class="fas fa-phone"></i> +34 123 456 789</p>
+                        <p><i class="fas fa-envelope"></i> info@revivetuhogar.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Calle Principal 123, Madrid</p>
+                    </div>
+                    <div class="quick-links">
+                        <h3>Enlaces Rápidos</h3>
+                        <ul>
+                            <li><a href="../../">Inicio</a></li>
+                            <li><a href="../../#servicios">Servicios</a></li>
+                            <li><a href="../../#galeria">Proyectos</a></li>
+                            <li><a href="../../#contacto">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div class="social">
+                        <h3>Síguenos</h3>
+                        <div class="social-icons">
+                            <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2024 Revive Tu Hogar. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="../../js/main.js"></script>
+</body>
+</html>

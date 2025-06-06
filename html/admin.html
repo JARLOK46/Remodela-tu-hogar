@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Revive Tu Hogar</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .post-form {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+        }
+        
+        .preview-container {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            border: 1px solid #ddd;
+        }
+        
+        .preview-container img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+            border-radius: var(--border-radius);
+        }
+        
+        .preview-title {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .preview-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .preview-content {
+            line-height: 1.6;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .post-list {
+            border-top: 1px solid #eee;
+            padding-top: 1.5rem;
+        }
+        
+        .post-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .post-item:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .post-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn-edit, .btn-delete {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .btn-edit {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-delete {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .alert {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Revive Tu Hogar - Admin</h1>
+        <p>Panel de administración</p>
+    </header>
+    <nav>
+        <a href="/">Volver al sitio</a>
+        <a href="#" class="active">Administrar Blog</a>
+    </nav>
+    <main>
+        <div class="admin-container">
+            <div class="admin-header">
+                <h2>Administrar Blog</h2>
+                <button id="newPostBtn" class="btn-secondary">Nuevo Post</button>
+            </div>
+            
+            <div id="alertContainer"></div>
+            
+            <div id="postForm" class="post-form" style="display: none;">
+                <h3 id="formTitle">Nuevo Post</h3>
+                <form id="blogPostForm">
+                    <input type="hidden" id="postId">
+                    <div class="form-group">
+                        <label for="title">Título</label>
+                        <input type="text" id="title" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Autor</label>
+                        <input type="text" id="author" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="imageUrl">URL de la imagen</label>
+                        <input type="text" id="imageUrl" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
+                        <small class="form-text">Ingresa la URL completa de la imagen</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Contenido</label>
+                        <div id="toolbar-container">
+                            <span class="ql-formats">
+                                <select class="ql-font"></select>
+                                <select class="ql-size"></select>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-bold"></button>
+                                <button class="ql-italic"></button>
+                                <button class="ql-underline"></button>
+                                <button class="ql-strike"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <select class="ql-color"></select>
+                                <select class="ql-background"></select>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-list" value="ordered"></button>
+                                <button class="ql-list" value="bullet"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-link"></button>
+                                <button class="ql-image"></button>
+                            </span>
+                        </div>
+                        <div id="editor-container" style="height: 300px;"></div>
+                        <textarea id="content" class="form-control" rows="10" style="display: none;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="previewBtn" class="btn">Vista Previa</button>
+                        <button type="submit" id="saveBtn" class="btn-secondary">Guardar</button>
+                        <button type="button" id="cancelBtn" class="btn">Cancelar</button>
+                    </div>
+                </form>
+                
+                <div id="previewContainer" class="preview-container" style="display: none;">
+                    <h4 class="preview-title">Vista Previa</h4>
+                    <div id="postPreview">
+                        <h3 id="previewTitle" class="preview-title"></h3>
+                        <div id="previewMeta" class="preview-meta"></div>
+                        <img id="previewImage" src="" alt="" style="display: none;">
+                        <div id="previewContent" class="preview-content"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-list">
+                <h3>Posts Publicados</h3>
+                <div id="postsList"></div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="about">
+            <h3>Panel de Administración</h3>
+            <p>Gestiona el contenido de tu blog desde este panel.</p>
+        </div>
+        <div class="contact-info">
+            <p>© 2024 Revive Tu Hogar. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <!-- Include admin.js script for functionality -->
+    <script src="../js/admin.js"></script>
+</body>
+</html>
