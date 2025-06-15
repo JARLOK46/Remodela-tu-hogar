@@ -615,6 +615,33 @@ function createCommentElement(comment) {
     return commentElement;
 }
 
+// Manejo de la selección de planes de precios
+document.addEventListener('DOMContentLoaded', function() {
+    // Agregar evento a los botones de "¡LO QUIERO!"
+    const planButtons = document.querySelectorAll('.btn-pricing');
+    
+    planButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Obtener el nombre del plan seleccionado
+            const planCard = this.closest('.pricing-card');
+            const planName = planCard.querySelector('h3').textContent;
+            
+            // Guardar el plan seleccionado en el almacenamiento local
+            localStorage.setItem('selectedPlan', planName);
+            
+            // Desplazarse a la sección de contacto
+            document.querySelector('#contacto').scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            // Opcional: Mostrar un mensaje al usuario
+            setTimeout(() => {
+                alert(`¡Has seleccionado el plan ${planName}! Por favor completa el formulario de contacto y nos pondremos en contacto contigo para continuar con el proceso.`);
+            }, 500);
+        });
+    });
+});
+
 /**
  * Submit a new comment
  */

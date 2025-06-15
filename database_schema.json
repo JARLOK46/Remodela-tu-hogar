@@ -1,0 +1,329 @@
+{
+  "usuarios": [
+    {
+      "name": "id",
+      "type": "INTEGER",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": true
+    },
+    {
+      "name": "username",
+      "type": "TEXT",
+      "notnull": true,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "email",
+      "type": "TEXT",
+      "notnull": true,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "password_hash",
+      "type": "TEXT",
+      "notnull": true,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "nombre_completo",
+      "type": "TEXT",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "telefono",
+      "type": "TEXT",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "rol",
+      "type": "TEXT",
+      "notnull": false,
+      "default_value": "'usuario'",
+      "is_pk": false
+    },
+    {
+      "name": "fecha_creacion",
+      "type": "TIMESTAMP",
+      "notnull": false,
+      "default_value": "CURRENT_TIMESTAMP",
+      "is_pk": false
+    },
+    {
+      "name": "ultimo_acceso",
+      "type": "TIMESTAMP",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "activo",
+      "type": "BOOLEAN",
+      "notnull": false,
+      "default_value": "1",
+      "is_pk": false
+    }
+  ],
+  "sqlite_sequence": [
+    {
+      "name": "name",
+      "type": "",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "seq",
+      "type": "",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": false
+    }
+  ],
+  "publicaciones": [
+    {
+      "name": "id",
+      "type": "INTEGER",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": true
+    },
+    {
+      "name": "titulo",
+      "type": "TEXT",
+      "notnull": true,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "contenido",
+      "type": "TEXT",
+      "notnull": true,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "autor_id",
+      "type": "INTEGER",
+      "notnull": true,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "fecha_publicacion",
+      "type": "TIMESTAMP",
+      "notnull": false,
+      "default_value": "CURRENT_TIMESTAMP",
+      "is_pk": false
+    },
+    {
+      "name": "fecha_actualizacion",
+      "type": "TIMESTAMP",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "estado",
+      "type": "TEXT",
+      "notnull": false,
+      "default_value": "'borrador'",
+      "is_pk": false
+    },
+    {
+      "name": "categoria",
+      "type": "TEXT",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "imagen_portada",
+      "type": "TEXT",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": false
+    }
+  ],
+  "comentarios": [
+    {
+      "name": "id",
+      "type": "INTEGER",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": true
+    },
+    {
+      "name": "publicacion_id",
+      "type": "INTEGER",
+      "notnull": true,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "usuario_id",
+      "type": "INTEGER",
+      "notnull": true,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "contenido",
+      "type": "TEXT",
+      "notnull": true,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "fecha_comentario",
+      "type": "TIMESTAMP",
+      "notnull": false,
+      "default_value": "CURRENT_TIMESTAMP",
+      "is_pk": false
+    },
+    {
+      "name": "aprobado",
+      "type": "BOOLEAN",
+      "notnull": false,
+      "default_value": "0",
+      "is_pk": false
+    }
+  ],
+  "contactos": [
+    {
+      "name": "id",
+      "type": "INTEGER",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": true
+    },
+    {
+      "name": "nombre",
+      "type": "TEXT",
+      "notnull": true,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "email",
+      "type": "TEXT",
+      "notnull": true,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "telefono",
+      "type": "TEXT",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "asunto",
+      "type": "TEXT",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "mensaje",
+      "type": "TEXT",
+      "notnull": true,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "fecha_consulta",
+      "type": "TIMESTAMP",
+      "notnull": false,
+      "default_value": "CURRENT_TIMESTAMP",
+      "is_pk": false
+    },
+    {
+      "name": "leido",
+      "type": "BOOLEAN",
+      "notnull": false,
+      "default_value": "0",
+      "is_pk": false
+    },
+    {
+      "name": "respondido",
+      "type": "BOOLEAN",
+      "notnull": false,
+      "default_value": "0",
+      "is_pk": false
+    }
+  ],
+  "proyectos": [
+    {
+      "name": "id",
+      "type": "INTEGER",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": true
+    },
+    {
+      "name": "titulo",
+      "type": "TEXT",
+      "notnull": true,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "descripcion",
+      "type": "TEXT",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "fecha_inicio",
+      "type": "DATE",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "fecha_fin",
+      "type": "DATE",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "cliente_id",
+      "type": "INTEGER",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "estado",
+      "type": "TEXT",
+      "notnull": false,
+      "default_value": "'pendiente'",
+      "is_pk": false
+    },
+    {
+      "name": "presupuesto",
+      "type": "DECIMAL(10, 2)",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": false
+    },
+    {
+      "name": "direccion",
+      "type": "TEXT",
+      "notnull": false,
+      "default_value": null,
+      "is_pk": false
+    }
+  ]
+}
